@@ -8,8 +8,14 @@ console.log("Hello World");
 const filePath = `${__dirname}/views/index.html`;
 const staticPath = `${__dirname}/public`;
 
+const logger = (req, res, next) => {
+  console.log(`${req.method} ${req.path} - ${req.ip}`);
+  next();
+};
+
 // global middlewares
 app.use('/public', express.static(staticPath));
+app.use(logger);
 
 app.get("/", function (req, res) {
   // res.send("Hello Express");
