@@ -18,14 +18,14 @@ const home = require("./routes");
 const chainingMiddleware = require("./routes/chaining-middleware");
 const routing = require("./routes/routes");
 const routeParameter = require("./routes/route-parameter");
-const queryParameter = require("./routes/query-parameter");
+const getData = require("./routes/get-data");
 
 
 home(filePath, app);
 chainingMiddleware(app);
 routing(app);
 routeParameter(app);
-queryParameter(app);
+getData(app);
 
 
 
