@@ -13,6 +13,11 @@ const logger = (req, res, next) => {
   next();
 };
 
+const getTime = (req, res, next) => {
+  req.time = new Date().toString();
+  next();
+}
+
 // global middlewares
 app.use('/public', express.static(staticPath));
 app.use(logger);
@@ -32,6 +37,7 @@ app.get("/json", (req, res) => {
   res.json({ message: response });
 });
 
+app.get("/now", getTime, (req, res) => res.json({ time: req.time }));
 
 
 
