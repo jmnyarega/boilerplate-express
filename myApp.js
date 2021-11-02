@@ -1,4 +1,6 @@
 const express = require('express');
+const bodyParser = require("body-parser");
+
 const app = express();
 
 const home = require("./routes");
@@ -16,6 +18,8 @@ const filePath = `${__dirname}/views/index.html`;
 // global middlewares
 app.use('/public', express.static(staticPath));
 app.use(logger);
+//  values can be only strings or arrays
+app.use(bodyParser.urlencoded({ extended: false }));
 
 home(filePath, app);
 chainingMiddleware(app);
