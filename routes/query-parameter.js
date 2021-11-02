@@ -11,5 +11,9 @@ module.exports = (app) => {
       const name = `${req.query.first} ${req.query.last}`;
       res.json({ name });
     })
-    .post((req, res) => {});
+    .post((req, res) => {
+      const first = req.body.first;
+      const last = req.body.last;
+      res.json({ name: `${first} ${last}` });
+    });
 };

@@ -1,25 +1,25 @@
 const express = require('express');
 const bodyParser = require("body-parser");
 
-const app = express();
+require('dotenv').config()
 
+// middlewares
+const logger = require("./middlewares/logger");
+const staticPath = `${__dirname}/public`;
+const filePath = `${__dirname}/views/index.html`;
+
+const app = express();
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use('/public', express.static(staticPath));
+app.use(logger);
+
+// routes
 const home = require("./routes");
 const chainingMiddleware = require("./routes/chaining-middleware");
 const routing = require("./routes/routes");
 const routeParameter = require("./routes/route-parameter");
 const queryParameter = require("./routes/query-parameter");
 
-const logger = require("./middlewares/logger");
-require('dotenv').config()
-
-const staticPath = `${__dirname}/public`;
-const filePath = `${__dirname}/views/index.html`;
-
-// global middlewares
-app.use('/public', express.static(staticPath));
-app.use(logger);
-//  values can be only strings or arrays
-app.use(bodyParser.urlencoded({ extended: false }));
 
 home(filePath, app);
 chainingMiddleware(app);
